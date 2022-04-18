@@ -1,0 +1,28 @@
+table td:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table {
+  border: 0.5px solid #000000;
+}
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 0.5px solid #000000;
+}
+
+.tableFixHead {
+  overflow: auto;
+  height: 800px;
+  width: 100%;
+}
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.tbord {
+  border-left: 2px solid #000000 !important;
+}

@@ -1,0 +1,18 @@
+body {
+  font-family: 'Public Sans', sans-serif !important;
+}
+
+.job-table {
+  font-size: 0.8em;
+}
+
+.goldStar {
+  /* color: crimson; */
+  color: red;
+}
+
+/* .depth {
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow: 20px 20px 60px #fff, -20px -20px 60px #ffffff;
+} */

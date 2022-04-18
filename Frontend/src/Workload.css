@@ -1,0 +1,31 @@
+body {
+  background: #d3cce3;
+  background: -webkit-linear-gradient(to right, #e9e4f0, #d3cce3);
+  background: linear-gradient(to right, #e9e4f0, #d3cce3);
+}
+
+.mbsc-schedule-event-range {
+  /* display: none; */
+  opacity: 0;
+}
+
+/*For viewing entire header at once
+ .mbsc-timeline-column,
+.mbsc-timeline-header-column {
+  width: auto;
+} */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print,
+  #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
