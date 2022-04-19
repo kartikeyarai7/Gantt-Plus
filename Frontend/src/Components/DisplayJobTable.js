@@ -36,6 +36,7 @@ const DisplayJobTable = () => {
         </thead>
         <tbody>
           {db &&
+            db.length !== 0 &&
             db.map((job, index) => (
               <tr className='text-light'>
                 <td className={!job.assigned && 'bg-danger'}>{index + 1}</td>

@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config({ path: __dirname + '../../.env' });
 const axios = require('axios');
 const app = express();
+const path = require('path');
 
 const dayjs = require('dayjs');
 const isBetween = require('dayjs/plugin/isBetween');
@@ -40,10 +41,6 @@ async function main() {
 }
 
 main().catch(console.error);
-
-app.get('/', (req, res) => {
-  res.send('Helloooo');
-});
 
 // Checking for user
 app.post('/check_user', async (req, res) => {
@@ -1510,8 +1507,18 @@ app.put('/edit_bds', async (request, response) => {
   }
 });
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'frontend', 'build', 'index.html')));
+} else {
+  app.get('/', (req, res) => {
+    res.send('Helloooo');
+  });
+}
+
 //
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log(`Server listening at ${port} `);
 });
