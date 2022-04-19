@@ -19,8 +19,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
-    "server": "node backend/index.js"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Frontend && npm run build --prefix Frontend",
+    "server": "node Backend/index.js"
   },
   "repository": {
     "type": "git",
