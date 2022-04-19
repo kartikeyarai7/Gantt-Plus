@@ -21,25 +21,6 @@ const port = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const data = [
-  {
-    username: 'Kartikey',
-    password: 'dev@services'
-  },
-  {
-    username: 'Ajeesh',
-    password: 'sm@services'
-  },
-  {
-    username: 'Yann',
-    password: 'hod@services'
-  },
-  {
-    username: 'Chinthu',
-    password: 'rm@services'
-  }
-];
-
 async function main() {
   try {
     console.log(process.env.MONGO_URI);
