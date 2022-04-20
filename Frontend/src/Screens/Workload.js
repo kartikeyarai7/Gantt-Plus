@@ -354,9 +354,9 @@ const Workload = () => {
               Filter
             </Button>
           </Row>
-          <Button onClick={printPdf}>
+          {/* <Button onClick={printPdf}>
             <i class='fa-solid fa-file-arrow-down'></i>
-          </Button>
+          </Button> */}
           <Button onClick={downloadScreenshot}>
             <i class='fa-solid fa-image'></i>
           </Button>
