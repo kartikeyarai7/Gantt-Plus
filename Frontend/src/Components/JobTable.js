@@ -57,7 +57,7 @@ const JobTable = ({ childToParent, editDataChildToParent }) => {
 
   async function getDataHandler() {
     try {
-      const { data } = await axios.get('/jobs');
+      const { data } = await axios.get('/api/jobs');
       setDb(data);
     } catch (error) {
       console.log(error);
@@ -67,7 +67,7 @@ const JobTable = ({ childToParent, editDataChildToParent }) => {
   async function deleteHandler(i) {
     try {
       const id = { id: db[i]._id };
-      const { res } = await axios.post('/delete_job', id);
+      const { res } = await axios.post('/api/delete_job', id);
       notyf.error('Job deleted');
       // window.location.reload();
     } catch (error) {
@@ -77,7 +77,7 @@ const JobTable = ({ childToParent, editDataChildToParent }) => {
 
   async function getResources() {
     try {
-      const { data } = await axios.get('/get_resource');
+      const { data } = await axios.get('/api/get_resource');
       if (data) {
         setResources(data);
       }
@@ -123,7 +123,7 @@ const JobTable = ({ childToParent, editDataChildToParent }) => {
   async function assignHandler(d) {
     try {
       console.log(d);
-      const res = await axios.post('/assign_ganttPro', d);
+      const res = await axios.post('/api/assign_ganttPro', d);
       if (res.data === 'Updated') {
         notyf.success('GanttPRO updated');
       } else if (res.data === 'Error') {
@@ -164,7 +164,7 @@ const JobTable = ({ childToParent, editDataChildToParent }) => {
       isLeader: db[i].lead
     };
 
-    const res = await axios.post('/assign_jobs', data);
+    const res = await axios.post('/api/assign_jobs', data);
     childToParent(res.data, db[i]);
     console.log(res.data);
   }

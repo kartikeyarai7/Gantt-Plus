@@ -36,7 +36,7 @@ const Schedule = () => {
   }, []);
 
   async function getProjects() {
-    const { data } = await axios.get('/get_projects');
+    const { data } = await axios.get('/api/get_projects');
     setProjects(data);
 
     let gpGroups = [];
@@ -62,7 +62,7 @@ const Schedule = () => {
     const a = {
       arr: ids
     };
-    const pro = await axios.post('/workload', a);
+    const pro = await axios.post('/api/workload', a);
     let events = [];
 
     pro.data.forEach((item, i) => {

@@ -35,7 +35,7 @@ const Plan = () => {
 
   async function getDataHandler() {
     try {
-      const { data } = await axios.get('/jobs');
+      const { data } = await axios.get('/api/jobs');
       setDb(data);
     } catch (error) {
       console.log(error);

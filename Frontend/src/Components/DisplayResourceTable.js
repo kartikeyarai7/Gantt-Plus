@@ -13,7 +13,7 @@ const DisplayResourceTable = () => {
 
   async function getDataHandler() {
     try {
-      const { data } = await axios.get('/users');
+      const { data } = await axios.get('/api/users');
       data.sort((a, b) => {
         let fa = a.name.toLowerCase(),
           fb = b.name.toLowerCase();

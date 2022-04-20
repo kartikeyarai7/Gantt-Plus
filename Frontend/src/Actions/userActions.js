@@ -13,7 +13,7 @@ export const login = (username, password) => async dispatch => {
       }
     };
 
-    const { data } = await axios.post('/admin/login', { username, password }, config);
+    const { data } = await axios.post('/api/admin/login', { username, password }, config);
 
     dispatch({
       type: USER_LOGIN_SUCCESS,

@@ -74,7 +74,7 @@ const Report = () => {
 
   async function getDataHandler() {
     try {
-      const { data } = await axios.get('/users');
+      const { data } = await axios.get('/api/users');
       setResources(data);
     } catch (error) {
       console.log(error);
@@ -82,7 +82,7 @@ const Report = () => {
   }
 
   async function getProjects() {
-    const { data } = await axios.get('/get_projects');
+    const { data } = await axios.get('/api/get_projects');
     setProjects(data);
     console.log(data);
     let ids = [];
@@ -92,7 +92,7 @@ const Report = () => {
     const a = {
       arr: ids
     };
-    const pro = await axios.post('/workload', a);
+    const pro = await axios.post('/api/workload', a);
     // console.log(pro);
     // let events = [];
     setFilterProjects(pro.data);

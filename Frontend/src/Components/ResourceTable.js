@@ -21,7 +21,7 @@ const ResourceTable = ({ childToParent }) => {
 
   async function getDataHandler() {
     try {
-      const { data } = await axios.get('/users');
+      const { data } = await axios.get('/api/users');
       data.sort((a, b) => {
         let fa = a.name.toLowerCase(),
           fb = b.name.toLowerCase();
@@ -60,7 +60,7 @@ const ResourceTable = ({ childToParent }) => {
   async function deleteHandler(i) {
     try {
       const id = { id: db[i]._id };
-      const { res } = await axios.post('/delete', id);
+      const { res } = await axios.post('/api/delete', id);
       console.log(res);
       notyf.error('Resource deleted');
       window.location.reload();

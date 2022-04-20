@@ -1200,7 +1200,7 @@ const JobInfo = ({ sendData, projects }) => {
     const options = {
       projectId: id
     };
-    const res = await axios.post('/get_project', options);
+    const res = await axios.post('/api/get_project', options);
     let array = [];
     res.data.forEach(item => {
       let a = { value: '', label: '' };
@@ -1240,7 +1240,7 @@ const JobInfo = ({ sendData, projects }) => {
           data: data,
           id: sendData._id
         };
-        const { res } = await axios.put('/edit_job', updatedData);
+        const { res } = await axios.put('/api/edit_job', updatedData);
         emptyForm();
         // window.location.reload();
       }

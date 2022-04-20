@@ -42,7 +42,7 @@ const Jobs = () => {
   // }, []); Combined with above
 
   async function getProjects() {
-    const { data } = await axios.get('/get_projects');
+    const { data } = await axios.get('/api/get_projects');
     setProjects(data);
   }
 
@@ -78,7 +78,7 @@ const Jobs = () => {
       id: resource._id
     };
     try {
-      const res = await axios.post('/assign_resource', data);
+      const res = await axios.post('/api/assign_resource', data);
       console.log(res);
       if (res.data === 'Assigned') {
         notyf.success('Resource assigned');

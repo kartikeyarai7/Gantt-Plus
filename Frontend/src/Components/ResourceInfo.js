@@ -446,7 +446,7 @@ const ResourceInfo = ({ sendData }) => {
     }
 
     try {
-      const { res } = await axios.post('/add_user', data);
+      const { res } = await axios.post('/api/add_user', data);
       emptyForm();
       notyf.success('New resource added');
       window.location.reload();
@@ -544,7 +544,7 @@ const ResourceInfo = ({ sendData }) => {
           data: data,
           id: sendData._id
         };
-        const { res } = await axios.put('/edit_user', updatedData);
+        const { res } = await axios.put('/api/edit_user', updatedData);
         setEditedLead([]);
         setEditedCountries([]);
         setEditedExp([]);

@@ -68,7 +68,7 @@ const CalendarBDS = () => {
   async function deleteHandler(i) {
     try {
       const id = { id: data[i]._id };
-      const { res } = await axios.post('/delete_bds', id);
+      const { res } = await axios.post('/api/delete_bds', id);
       notyf.error('Job deleted');
       // window.location.reload();
     } catch (error) {
@@ -78,7 +78,7 @@ const CalendarBDS = () => {
 
   async function getDataHandler() {
     try {
-      const { data } = await axios.get('/bds-schedule');
+      const { data } = await axios.get('/api/bds-schedule');
       setData(data);
     } catch (error) {
       console.log(error);
@@ -136,7 +136,7 @@ const CalendarBDS = () => {
         const updatedData = {
           data: arrUniq
         };
-        const res = await axios.put('/edit_bds', updatedData);
+        const res = await axios.put('/api/edit_bds', updatedData);
         if (res.status === 200) {
           notyf.success('Database updated');
         }
@@ -165,7 +165,7 @@ const CalendarBDS = () => {
         let curData = [...data];
         curData.push(obj);
         try {
-          const { res } = await axios.post('/add_bds-schedule', obj);
+          const { res } = await axios.post('/api/add_bds-schedule', obj);
           notyf.success('New Job added');
 
           // window.location.reload();

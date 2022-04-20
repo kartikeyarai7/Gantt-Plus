@@ -32,7 +32,7 @@ const ProfileScreen = () => {
       setResourceId(id);
       async function checkUser() {
         const id = { id: resourceId };
-        const { data } = await axios.post('/check_user', id);
+        const { data } = await axios.post('/api/check_user', id);
         if (data) {
           setUser(data);
         }
@@ -53,7 +53,7 @@ const ProfileScreen = () => {
         nameDel: job.name
       };
 
-      const { res } = await axios.post('/delete_schedule', headerData);
+      const { res } = await axios.post('/api/delete_schedule', headerData);
       console.log(res);
       // notyf.error('Deleted Schedule');
       window.location.reload();

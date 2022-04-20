@@ -24,7 +24,7 @@ const CandidateTable = ({ resourceArray, assignTask, jobAssigned, projects }) =>
     });
     const options = { name: rName, projectsGp: pro };
     try {
-      const res = await axios.post('/gantt_pro', options);
+      const res = await axios.post('/api/gantt_pro', options);
       console.log(res.data);
       if (res.data) {
         notyf.success('Received List of Projects');
@@ -45,7 +45,7 @@ const CandidateTable = ({ resourceArray, assignTask, jobAssigned, projects }) =>
       endDate: job.endDate
     };
     try {
-      const res = await axios.post('/gantt_proCheck', options);
+      const res = await axios.post('/api/gantt_proCheck', options);
       console.log(res);
       if (res.data === 'Not available') {
         notyf.error('Not Available');

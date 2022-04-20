@@ -43,7 +43,7 @@ async function main() {
 main().catch(console.error);
 
 // Checking for user
-app.post('/check_user', async (req, res) => {
+app.post('/api/check_user', async (req, res) => {
   const { id } = req.body;
   try {
     if (mongoose.isValidObjectId(id)) {
@@ -60,7 +60,7 @@ app.post('/check_user', async (req, res) => {
   }
 });
 
-app.post('/check_job', async (req, res) => {
+app.post('/api/check_job', async (req, res) => {
   const { id } = req.body;
   try {
     if (mongoose.isValidObjectId(id)) {
@@ -78,7 +78,7 @@ app.post('/check_job', async (req, res) => {
 });
 
 // New Resource
-app.post('/add_user', async (request, response) => {
+app.post('/api/add_user', async (request, response) => {
   const user = new userModel(request.body);
 
   try {
@@ -90,7 +90,7 @@ app.post('/add_user', async (request, response) => {
 });
 
 //New Job
-app.post('/add_job', async (request, response) => {
+app.post('/api/add_job', async (request, response) => {
   // const { projectStartDate, projectEndDate, startDate, endDate } = request.body;
   const job = new jobModel(request.body);
 
@@ -109,7 +109,7 @@ app.post('/add_job', async (request, response) => {
 });
 
 // Assign Resource
-app.post('/assign_resource', async (req, res) => {
+app.post('/api/assign_resource', async (req, res) => {
   const { name, jobId, id } = req.body;
 
   try {
@@ -153,7 +153,7 @@ app.post('/assign_resource', async (req, res) => {
   // res.json('Assigning job to ' + name + ' where jobId is ' + jobId);
 });
 
-app.post('/filter_jobs', async (req, res) => {
+app.post('/api/filter_jobs', async (req, res) => {
   const { team } = req.body;
   try {
     if (team === 'Choose') {
@@ -171,7 +171,7 @@ app.post('/filter_jobs', async (req, res) => {
 });
 
 // Get all users
-app.get('/users', async (request, response) => {
+app.get('/api/users', async (request, response) => {
   const users = await userModel.find({});
 
   try {
@@ -182,7 +182,7 @@ app.get('/users', async (request, response) => {
 });
 
 //Authenticate Admins
-app.post('/admin/login', async (req, res) => {
+app.post('/api/admin/login', async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await adminControllerModel.findOne({ username: username });
@@ -215,7 +215,7 @@ app.post('/admin/login', async (req, res) => {
 });
 
 //Get all jobs
-app.get('/jobs', async (request, response) => {
+app.get('/api/jobs', async (request, response) => {
   const jobs = await jobModel.find({});
 
   try {
@@ -226,7 +226,7 @@ app.get('/jobs', async (request, response) => {
 });
 
 //Delete Resource
-app.post('/delete', async (req, res) => {
+app.post('/api/delete', async (req, res) => {
   const { id } = req.body;
   try {
     userModel.deleteOne({ _id: id }, () => {
@@ -238,7 +238,7 @@ app.post('/delete', async (req, res) => {
 });
 
 // Delete Job
-app.post('/delete_job', async (req, res) => {
+app.post('/api/delete_job', async (req, res) => {
   const { id } = req.body;
   let users = [];
   let user;
@@ -282,7 +282,7 @@ app.post('/delete_job', async (req, res) => {
 
 //Find suitable candidates
 //FE-Level to Min-FE-Level
-app.post('/assign_job', async (req, res) => {
+app.post('/api/assign_job', async (req, res) => {
   const { skills, machines, country, startDate, endDate, productExp, feLevel, exp, isLeader } = req.body;
   //Removed the start and end time for last dates
   let d1 = dayjs(startDate);
@@ -439,7 +439,7 @@ app.post('/assign_job', async (req, res) => {
   }
 });
 
-app.post('/assign_jobs', async (req, res) => {
+app.post('/api/assign_jobs', async (req, res) => {
   const { skills, machines, productExp, feLevel, exp, isLeader } = req.body;
   if (skills === 'BPS' || skills === 'Adaptation') {
     if (isLeader) {
@@ -1118,7 +1118,7 @@ app.post('/assign_jobs', async (req, res) => {
 });
 
 //test
-app.post('/schedule', async (req, res) => {
+app.post('/api/schedule', async (req, res) => {
   try {
     res.json('Assigning task here');
   } catch (error) {
@@ -1128,7 +1128,7 @@ app.post('/schedule', async (req, res) => {
 
 //Delete Schedule
 
-app.post('/delete_schedule', async (request, response) => {
+app.post('/api/delete_schedule', async (request, response) => {
   const { id, nameDel } = request.body;
   try {
     if (mongoose.isValidObjectId(id)) {
@@ -1142,7 +1142,7 @@ app.post('/delete_schedule', async (request, response) => {
 });
 
 //Editing resource
-app.put('/edit_user', async (request, response) => {
+app.put('/api/edit_user', async (request, response) => {
   const { data, id } = request.body;
   try {
     if (mongoose.isValidObjectId(id)) {
@@ -1174,7 +1174,7 @@ app.put('/edit_user', async (request, response) => {
 });
 
 //Edit Job
-app.put('/edit_job', async (request, response) => {
+app.put('/api/edit_job', async (request, response) => {
   const { data, id } = request.body;
   // console.log(data);
   try {
@@ -1201,7 +1201,7 @@ app.put('/edit_job', async (request, response) => {
   }
 });
 
-app.put('/delete_assigned', async (request, response) => {
+app.put('/api/delete_assigned', async (request, response) => {
   const { id, resourceArray } = request.body;
   try {
     if (mongoose.isValidObjectId(id)) {
@@ -1222,7 +1222,7 @@ app.put('/delete_assigned', async (request, response) => {
 // GANTT PRO INTEGRATION
 // 1. GENERATING URL LINK FOR TASKLIST
 
-app.post('/gantt_pro', async (req, res) => {
+app.post('/api/gantt_pro', async (req, res) => {
   const { name, projectsGp } = req.body;
   // console.log(req.body);
   const url = 'https://api.ganttpro.com/v1.0/resources';
@@ -1267,7 +1267,7 @@ app.post('/gantt_pro', async (req, res) => {
 });
 
 //CHECKING PROJECTS
-app.get('/get_projects', async (req, res) => {
+app.get('/api/get_projects', async (req, res) => {
   try {
     const url = 'https://api.ganttpro.com/v1.0/projects';
     const options = { method: 'GET', headers: { Accept: 'application/json', 'X-API-Key': `${process.env.KEY}` } };
@@ -1278,7 +1278,7 @@ app.get('/get_projects', async (req, res) => {
   }
 });
 
-app.post('/get_project', async (req, res) => {
+app.post('/api/get_project', async (req, res) => {
   const { projectId } = req.body;
   try {
     const url = `https://api.ganttpro.com/v1.0/tasks?projectId=${projectId}`;
@@ -1293,7 +1293,7 @@ app.post('/get_project', async (req, res) => {
   }
 });
 
-app.get('/get_resource', async (req, res) => {
+app.get('/api/get_resource', async (req, res) => {
   try {
     const url = 'https://api.ganttpro.com/v1.0/resources';
     const options = {
@@ -1308,7 +1308,7 @@ app.get('/get_resource', async (req, res) => {
   }
 });
 
-app.post('/assign_ganttPro', async (req, res) => {
+app.post('/api/assign_ganttPro', async (req, res) => {
   const { resources, taskId } = req.body;
   const resourceArray = [];
   const url = `https://api.ganttpro.com/v1.0/tasks/${taskId}/assignResource`;
@@ -1332,7 +1332,7 @@ app.post('/assign_ganttPro', async (req, res) => {
 });
 
 // 2. SCRAPING TASKLIST FOR AVAILABILITY
-app.post('/gantt_proCheck', async (req, res) => {
+app.post('/api/gantt_proCheck', async (req, res) => {
   const { url, startDate, endDate, id } = req.body;
   const options = { method: 'GET', headers: { Accept: 'application/json', 'X-API-Key': `${process.env.KEY}` } };
   try {
@@ -1361,7 +1361,7 @@ app.post('/gantt_proCheck', async (req, res) => {
   }
 });
 
-app.post('/workload', async (req, res) => {
+app.post('/api/workload', async (req, res) => {
   const { arr } = req.body;
   let ids = '';
   arr.forEach(item => {
@@ -1390,7 +1390,7 @@ app.post('/workload', async (req, res) => {
 });
 
 // ADD BPS Schedule
-app.post('/add_bps-schedule', async (request, response) => {
+app.post('/api/add_bps-schedule', async (request, response) => {
   const bps = new bpsCalModel(request.body);
 
   try {
@@ -1402,7 +1402,7 @@ app.post('/add_bps-schedule', async (request, response) => {
 });
 
 //GET BPS Schedule
-app.get('/bps-schedule', async (request, response) => {
+app.get('/api/bps-schedule', async (request, response) => {
   const schedule = await bpsCalModel.find({});
   try {
     response.send(schedule);
@@ -1412,7 +1412,7 @@ app.get('/bps-schedule', async (request, response) => {
 });
 
 // DELETE ENTRY
-app.post('/delete_bps', async (req, res) => {
+app.post('/api/delete_bps', async (req, res) => {
   const { id } = req.body;
   let users = [];
   let user;
@@ -1427,7 +1427,7 @@ app.post('/delete_bps', async (req, res) => {
 });
 
 // UPDATE ROUTES
-app.put('/edit_bps', async (request, response) => {
+app.put('/api/edit_bps', async (request, response) => {
   const { data } = request.body;
 
   async function updateSchedules(item) {
@@ -1450,7 +1450,7 @@ app.put('/edit_bps', async (request, response) => {
 // BDS Calendar Routes
 
 // ADD BDS Schedule
-app.post('/add_bds-schedule', async (request, response) => {
+app.post('/api/add_bds-schedule', async (request, response) => {
   const bds = new bdsCalModel(request.body);
 
   try {
@@ -1462,7 +1462,7 @@ app.post('/add_bds-schedule', async (request, response) => {
 });
 
 //GET BDS Schedule
-app.get('/bds-schedule', async (request, response) => {
+app.get('/api/bds-schedule', async (request, response) => {
   const schedule = await bdsCalModel.find({});
   try {
     response.send(schedule);
@@ -1472,7 +1472,7 @@ app.get('/bds-schedule', async (request, response) => {
 });
 
 // DELETE ENTRY
-app.post('/delete_bds', async (req, res) => {
+app.post('/api/delete_bds', async (req, res) => {
   const { id } = req.body;
   let users = [];
   let user;
@@ -1487,7 +1487,7 @@ app.post('/delete_bds', async (req, res) => {
 });
 
 // UPDATE ROUTES
-app.put('/edit_bds', async (request, response) => {
+app.put('/api/edit_bds', async (request, response) => {
   const { data } = request.body;
 
   async function updateSchedules(item) {

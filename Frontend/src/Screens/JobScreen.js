@@ -28,7 +28,7 @@ const JobScreen = () => {
       setJobId(id);
       async function checkJob() {
         const id = { id: jobId };
-        const { data } = await axios.post('/check_job', id);
+        const { data } = await axios.post('/api/check_job', id);
         if (data) {
           setJob(data);
         }
@@ -45,7 +45,7 @@ const JobScreen = () => {
         id: jobId,
         resourceArray: job.assigned
       };
-      const res = await axios.put('/delete_assigned', body);
+      const res = await axios.put('/api/delete_assigned', body);
       console.log(res);
       if (res.data === 'Updated job') {
         window.location.reload();
