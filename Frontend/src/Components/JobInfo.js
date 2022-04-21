@@ -1263,7 +1263,7 @@ const JobInfo = ({ sendData, projects }) => {
     e.preventDefault();
     try {
       console.log(data);
-      const { res } = await axios.post('/add_job', data);
+      const { res } = await axios.post('/api/add_job', data);
       emptyForm();
       notyf.success('New Job added');
       // window.location.reload();

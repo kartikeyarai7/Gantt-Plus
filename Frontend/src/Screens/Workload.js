@@ -409,16 +409,16 @@ const Workload = () => {
                           <td style={{ background: '#4da6ff', color: 'white' }}>Blue</td>
                           <td>Project Installation</td>
                         </tr>
-                        <tr>
-                          <td style={{ background: '#2eb8b8' }}>Cyan</td>
-                          <td>Inhouse</td>
-                        </tr>
                       </tbody>
                     </Table>
                   </Col>
                   <Col>
                     <Table striped bordered hover className={'ms-auto p-2 mt-3'}>
                       <tbody>
+                        <tr>
+                          <td style={{ background: '#2eb8b8' }}>Cyan</td>
+                          <td>Inhouse</td>
+                        </tr>
                         <tr>
                           <td style={{ background: '#843c0b', color: 'white' }}>Brown</td>
                           <td>Adaptation Finetuning/Fresh Adaptation/SNR Adaptation - Inhouse</td>
@@ -432,7 +432,7 @@ const Workload = () => {
                           <td>Adaptation Finetuning/Fresh Adaptation/SNR Adaptation - Onsite</td>
                         </tr>
                         <tr>
-                          <td style={{ background: '#ed7d31', color: 'white' }}>Orange</td>
+                          <td style={{ background: '#ed7d31' }}>Orange</td>
                           <td>Adding new emission– Onsite</td>
                         </tr>
                       </tbody>
