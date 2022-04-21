@@ -131,24 +131,11 @@ const Workload = () => {
           rArr.push(res.resourceId);
         });
 
-        if (item.name.includes('PM')) {
-          event.color = '#00b300';
-        } else if (item.name.toLowerCase().includes('installation')) {
-          event.color = '#4da6ff';
-        } else if (item.name.includes('Leave') || item.name.includes('leave') || item.name.includes('Privelege')) {
-          event.color = '#94b8b8';
-        } else if (item.name.toLowerCase().includes('training')) {
-          event.color = '#ffcc00';
-        } else if (item.name.includes('OSS') || item.name.toLowerCase().includes('support')) {
-          event.color = '#9900cc';
-        } else if (item.name.includes('Wk')) {
-          event.color = '#2eb8b8';
-        }
-
         event.title = item.name;
         event.start = t1;
         event.end = t2;
         event.resource = rArr;
+        event.color = '#94b8b8';
         events.push(event);
       } else {
         let event = {
@@ -178,6 +165,10 @@ const Workload = () => {
           event.color = '#9900cc';
         } else if (item.name.includes('Wk')) {
           event.color = '#2eb8b8';
+        } else if ((item.name.toLowerCase().includes('adaptation') && item.name.toLowerCase().includes('inhouse')) || (item.name.toLowerCase().includes('emission') && item.name.toLowerCase().includes('inhouse')) || (item.name.toLowerCase().includes('fine tuning') && item.name.toLowerCase().includes('inhouse')) || (item.name.toLowerCase().includes('finetuning') && item.name.toLowerCase().includes('inhouse'))) {
+          event.color = '#843c0b';
+        } else if ((item.name.toLowerCase().includes('adaptation') && item.name.toLowerCase().includes('onsite')) || (item.name.toLowerCase().includes('emission') && item.name.toLowerCase().includes('onsite')) || (item.name.toLowerCase().includes('fine tuning') && item.name.toLowerCase().includes('onsite')) || (item.name.toLowerCase().includes('finetuning') && item.name.toLowerCase().includes('onsite'))) {
+          event.color = '#ed7d31';
         }
 
         event.title = item.name;
@@ -394,34 +385,60 @@ const Workload = () => {
 
               <div className='col'>
                 {/* <Table striped bordered hover className={skillsFilter === 'Software' ? 'w-50 ms-auto p-2 mt-3' : 'w-25 ms-auto p-2 mt-3'}> */}
-                <Table striped bordered hover className={'w-50 ms-auto p-2 mt-3'}>
-                  <tbody>
-                    <tr>
-                      <td style={{ background: '#ffcc00' }}>Yellow</td>
-                      <td>Training</td>
-                    </tr>
-                    <tr>
-                      <td style={{ background: '#00b300', color: 'white' }}>Green</td>
-                      <td>Preventive Maintenance</td>
-                    </tr>
-                    <tr>
-                      <td style={{ background: '#94b8b8' }}>Grey</td>
-                      <td>Leave</td>
-                    </tr>
-                    <tr>
-                      <td style={{ background: '#9900cc', color: 'white' }}>Purple</td>
-                      <td>Site Support</td>
-                    </tr>
-                    <tr>
-                      <td style={{ background: '#4da6ff', color: 'white' }}>Blue</td>
-                      <td>Project Installation</td>
-                    </tr>
-                    <tr>
-                      <td style={{ background: '#2eb8b8' }}>Cyan</td>
-                      <td>Inhouse</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <Row>
+                  <Col>
+                    <Table striped bordered hover className={'ms-auto p-2 mt-3'}>
+                      <tbody>
+                        <tr>
+                          <td style={{ background: '#ffcc00' }}>Yellow</td>
+                          <td>Training</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#00b300', color: 'white' }}>Green</td>
+                          <td>Preventive/ Corrective Maintenance</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#94b8b8' }}>Grey</td>
+                          <td>Leave</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#9900cc', color: 'white' }}>Purple</td>
+                          <td>Site Support</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#4da6ff', color: 'white' }}>Blue</td>
+                          <td>Project Installation</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#2eb8b8' }}>Cyan</td>
+                          <td>Inhouse</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col>
+                    <Table striped bordered hover className={'ms-auto p-2 mt-3'}>
+                      <tbody>
+                        <tr>
+                          <td style={{ background: '#843c0b', color: 'white' }}>Brown</td>
+                          <td>Adaptation Finetuning/Fresh Adaptation/SNR Adaptation - Inhouse</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#843c0b', color: 'white' }}>Brown</td>
+                          <td>Adding new emission– Inhouse</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#ed7d31' }}>Orange</td>
+                          <td>Adaptation Finetuning/Fresh Adaptation/SNR Adaptation - Onsite</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#ed7d31', color: 'white' }}>Orange</td>
+                          <td>Adding new emission– Onsite</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
               </div>
             </div>
           </div>

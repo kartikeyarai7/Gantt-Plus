@@ -147,22 +147,9 @@ const ProjectSchedule = () => {
         let t2 = item.endDate.split(' ')[0];
         t2 = t2 + 'T24:00';
 
-        if (item.name.includes('PM')) {
-          event.color = '#00b300';
-        } else if (item.name.toLowerCase().includes('installation')) {
-          event.color = '#4da6ff';
-        } else if (item.name.includes('Leave') || item.name.includes('leave') || item.name.includes('Privelege')) {
-          event.color = '#94b8b8';
-        } else if (item.name.toLowerCase().includes('training')) {
-          event.color = '#ffcc00';
-        } else if (item.name.includes('OSS') || item.name.toLowerCase().includes('support')) {
-          event.color = '#9900cc';
-        } else if (item.name.includes('Wk')) {
-          event.color = '#2eb8b8';
-        }
-
         event.title = item.name + ' - ' + suffixName;
         event.start = t1;
+        event.color = '#94b8b8';
         event.end = t2;
         event.resource = item.projectId;
         events.push(event);
@@ -196,6 +183,10 @@ const ProjectSchedule = () => {
           event.color = '#9900cc';
         } else if (item.name.includes('Wk')) {
           event.color = '#2eb8b8';
+        } else if ((item.name.toLowerCase().includes('adaptation') && item.name.toLowerCase().includes('inhouse')) || (item.name.toLowerCase().includes('emission') && item.name.toLowerCase().includes('inhouse')) || (item.name.toLowerCase().includes('fine tuning') && item.name.toLowerCase().includes('inhouse'))) {
+          event.color = '#843c0b';
+        } else if ((item.name.toLowerCase().includes('adaptation') && item.name.toLowerCase().includes('onsite')) || (item.name.toLowerCase().includes('emission') && item.name.toLowerCase().includes('onsite')) || (item.name.toLowerCase().includes('fine tuning') && item.name.toLowerCase().includes('onsite'))) {
+          event.color = '#ed7d31';
         }
 
         event.title = item.name + ' - ' + suffixName;
@@ -435,34 +426,65 @@ const ProjectSchedule = () => {
               }}
               colors={weekends}
             />
-            <Table striped bordered hover className='w-25 ms-auto p-2 mt-3'>
-              <tbody>
-                <tr>
-                  <td style={{ background: '#ffcc00' }}>Yellow</td>
-                  <td>Training</td>
-                </tr>
-                <tr>
-                  <td style={{ background: '#00b300', color: 'white' }}>Green</td>
-                  <td>Preventive Maintenace</td>
-                </tr>
-                <tr>
-                  <td style={{ background: '#94b8b8' }}>Grey</td>
-                  <td>Leave</td>
-                </tr>
-                <tr>
-                  <td style={{ background: '#9900cc', color: 'white' }}>Purple</td>
-                  <td>Site Support</td>
-                </tr>
-                <tr>
-                  <td style={{ background: '#4da6ff', color: 'white' }}>Blue</td>
-                  <td>Project Installation</td>
-                </tr>
-                <tr>
-                  <td style={{ background: '#2eb8b8' }}>Cyan</td>
-                  <td>Inhouse</td>
-                </tr>
-              </tbody>
-            </Table>
+            <div className='row'>
+              <div className='col'></div>
+              <div className='col'>
+                <Row>
+                  <Col>
+                    <Table striped bordered hover className='ms-auto p-2 mt-3'>
+                      <tbody>
+                        <tr>
+                          <td style={{ background: '#ffcc00' }}>Yellow</td>
+                          <td>Training</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#00b300', color: 'white' }}>Green</td>
+                          <td>Preventive Maintenace</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#94b8b8' }}>Grey</td>
+                          <td>Leave</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#9900cc', color: 'white' }}>Purple</td>
+                          <td>Site Support</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#4da6ff', color: 'white' }}>Blue</td>
+                          <td>Project Installation</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col>
+                    <Table striped bordered hover className={'ms-auto p-2 mt-3'}>
+                      <tbody>
+                        <tr>
+                          <td style={{ background: '#2eb8b8' }}>Cyan</td>
+                          <td>Inhouse</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#843c0b', color: 'white' }}>Brown</td>
+                          <td>Adaptation Finetuning/Fresh Adaptation/SNR Adaptation - Inhouse</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#843c0b', color: 'white' }}>Brown</td>
+                          <td>Adding new emission– Inhouse</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#ed7d31' }}>Orange</td>
+                          <td>Adaptation Finetuning/Fresh Adaptation/SNR Adaptation - Onsite</td>
+                        </tr>
+                        <tr>
+                          <td style={{ background: '#ed7d31' }}>Orange</td>
+                          <td>Adding new emission– Onsite</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+              </div>
+            </div>
           </div>
         </div>
       ) : (
