@@ -853,7 +853,7 @@ const ResourceInfo = ({ sendData }) => {
 
   const handleChangeSegment = t => {
     const seg = [];
-    t.map(item => {
+    t.forEach(item => {
       seg.push(item.value);
       if (item.value === 'M-Segment' && skills === 'BPS') {
         setProductOptions([
@@ -952,7 +952,7 @@ const ResourceInfo = ({ sendData }) => {
 
   const handleChangeLead = t => {
     const lead = [];
-    t.map(item => {
+    t.forEach(item => {
       lead.push(item.value);
     });
     setIsLeader(lead);
@@ -960,7 +960,7 @@ const ResourceInfo = ({ sendData }) => {
 
   const handleChangeLanguages = t => {
     const l = [];
-    t.map(item => {
+    t.forEach(item => {
       l.push(item.value);
     });
     setLanguages(l);
@@ -975,7 +975,7 @@ const ResourceInfo = ({ sendData }) => {
 
   const handleChangeExp = t => {
     const e1 = [];
-    t.map(item => {
+    t.forEach(item => {
       e1.push(item.value);
     });
     setExp(e1);

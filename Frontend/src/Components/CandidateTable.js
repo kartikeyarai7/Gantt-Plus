@@ -4,16 +4,8 @@ import axios from 'axios';
 import NotyfContext from './NotyfContext';
 import { useContext } from 'react';
 
-// import { Card, Row, Col, Button, ProgressBar } from 'react-bootstrap';
-
-const CandidateTable = ({ resourceArray, assignTask, jobAssigned, projects }) => {
+const CandidateTable = ({ resourceArray, assignTask, jobAssigned, projects, avl }) => {
   const notyf = useContext(NotyfContext);
-
-  // useEffect(() => {
-  //   if (resourceArray) {
-  //     resourceArray.sort((a, b) => (a.feLevel < b.feLevel ? 1 : -1));
-  //   }
-  // }, [resourceArray]);
 
   async function checkSchedule(resource, jobAssigned) {
     console.log(resource.name);
@@ -47,11 +39,10 @@ const CandidateTable = ({ resourceArray, assignTask, jobAssigned, projects }) =>
     try {
       const res = await axios.post('/api/gantt_proCheck', options);
       console.log(res);
-      if (res.data === 'Not available') {
-        notyf.error('Not Available');
+      if (res.data.includes('Clashed')) {
+        notyf.error(res.data);
       } else {
         notyf.success('Available');
-        // setAvl(true);
       }
     } catch (error) {
       console.log(error);
@@ -102,37 +93,13 @@ const CandidateTable = ({ resourceArray, assignTask, jobAssigned, projects }) =>
                       {' '}
                       Nationality : <span> {resource.nationality} </span>
                     </Card.Text>
-                    {/* <Card.Text className='text-dark'>
-                      {' '}
-                      Religion : <span> {resource.religion} </span>
-                    </Card.Text>
-                    <Card.Text className='text-dark'>
-                      {' '}
-                      Languages : <span> {resource.languages && resource.languages.map(i => i + ', ')} </span>
-                    </Card.Text> */}
-                    {/* <Card.Text className='text-dark'>
-                      M3 Experience : <ProgressBar now={resource.m3Value} />
-                    </Card.Text>
-                    <Card.Text className='text-dark'>
-                      M5 Experience : <ProgressBar now={resource.m5Value} />
-                    </Card.Text>
-                    <Card.Text className='text-dark'>
-                      M7 Experience : <ProgressBar now={resource.m7Value} />
-                    </Card.Text>
-                    <Card.Text className='text-dark'>
-                      X9 Experience : <ProgressBar now={resource.x9Value} />
-                    </Card.Text>
-                    <Card.Text className='text-dark'>
-                      C Experience : <ProgressBar now={resource.cSegmentValue} />
-                    </Card.Text>
-                    <Card.Text className='text-dark'>
-                      Pronote Experience : <ProgressBar now={resource.pronoteValue} />
-                    </Card.Text> */}
+                    {avl && <Card.Text className='text-dark'> Available : {resource.availability ? <span className='bg-success text-light p-2'> Yes </span> : <span className=' text-light p-2'> - </span>}</Card.Text>}
+
                     <Row>
                       <Button className='my-2' onClick={() => checkSchedule(resource, jobAssigned)}>
                         Check Schedule
                       </Button>
-                      <Button className='my-2' onClick={() => assignTask(resource)}>
+                      <Button className='my-2' onClick={() => assignTask(resource)} disabled={!resource.availability && avl}>
                         Assign
                       </Button>
                     </Row>

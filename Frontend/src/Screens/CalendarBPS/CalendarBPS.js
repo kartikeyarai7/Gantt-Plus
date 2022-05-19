@@ -68,7 +68,7 @@ const CalendarBPS = () => {
     try {
       const id = { id: data[i]._id };
       const { res } = await axios.post('/api/delete_bps', id);
-      notyf.error('Job deleted');
+      notyf.error('Job deleted. Reload');
       // window.location.reload();
     } catch (error) {
       console.log(error);
@@ -160,7 +160,7 @@ const CalendarBPS = () => {
         curData.push(obj);
         try {
           const { res } = await axios.post('/api/add_bps-schedule', obj);
-          notyf.success('New Job added');
+          notyf.success('New Job added. Reload');
 
           // window.location.reload();
         } catch (error) {

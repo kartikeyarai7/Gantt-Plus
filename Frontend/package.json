@@ -10,7 +10,6 @@
     "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
     "concurrently": "^6.2.2",
-    "daypilot-pro-react": "https://npm.daypilot.org/daypilot-pro-react/trial/2022.1.5242.tar.gz",
     "html2canvas": "^1.4.1",
     "immer": "^9.0.6",
     "interactjs": "^1.10.11",

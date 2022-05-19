@@ -14,6 +14,7 @@ const Workload = () => {
   const [resources, setResources] = useState([]);
   const [filteredResources, setFilteredResources] = useState([]);
   const [myResources, setMyResources] = useState([]);
+  const [currentMonth, setCurrentMonth] = useState('');
   const [skillsFilter, setSkillsFilter] = useState('');
   const [nameFilter, setNameFilter] = useState('');
   const [nationalityFilter, setNationalityFilter] = useState('');
@@ -354,8 +355,18 @@ const Workload = () => {
           {/* <img width={'80%'} src={image} alt={'Screenshot'} /> */}
 
           <div id='section-to-print' ref={ref} className={toPrint ? 'p-2' : 'vh-100 p-2'}>
-            <h2 className='text-center pt-2'>{skillsFilter && toPrint ? skillsFilter + ` - Resource Schedule updated till ${new Date()}` : ''}</h2>
-            <Eventcalendar theme='windows' themeVariant='light' view={view} data={liveEvents} resources={myResources} colors={weekends} />
+            <h2 className='text-center pt-2'>{skillsFilter && toPrint ? skillsFilter + ` - Resource Schedule for ${currentMonth} updated till ${new Date()}` : ''}</h2>
+            <Eventcalendar
+              theme='windows'
+              themeVariant='light'
+              view={view}
+              data={liveEvents}
+              resources={myResources}
+              colors={weekends}
+              onPageLoading={function (event, inst) {
+                setCurrentMonth(String(event.month).split(' ')[1]);
+              }}
+            />
             <div className='row'>
               {/* {skillsFilter === 'Software' && (
                 <div className='col'>

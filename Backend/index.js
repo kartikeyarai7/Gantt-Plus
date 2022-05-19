@@ -1335,6 +1335,7 @@ app.post('/api/assign_ganttPro', async (req, res) => {
 app.post('/api/gantt_proCheck', async (req, res) => {
   const { url, startDate, endDate, id } = req.body;
   const options = { method: 'GET', headers: { Accept: 'application/json', 'X-API-Key': `${process.env.KEY}` } };
+  let clashItem = '';
   try {
     const { data } = await axios.get(url, options);
     let clash = false;
@@ -1347,12 +1348,13 @@ app.post('/api/gantt_proCheck', async (req, res) => {
         if (dayjs(item.startDate.split(' ')[0]).isBetween(startDate, endDate) || dayjs(item.endDate.split(' ')[0]).isBetween(startDate, endDate) || dayjs(item.startDate.split(' ')[0]).isSame(startDate) || dayjs(item.endDate.split(' ')[0]).isSame(endDate) || dayjs(item.startDate.split(' ')[0]).isSame(endDate) || dayjs(item.endDate.split(' ')[0]).isSame(startDate) || (dayjs(item.startDate.split(' ')[0]).isAfter(startDate) && dayjs(item.endDate.split(' ')[0]).isBefore(endDate)) || (dayjs(item.startDate.split(' ')[0]).isBefore(startDate) && dayjs(item.endDate.split(' ')[0]).isAfter(endDate))) {
           clash = true;
           console.log('Clashed with ' + item.name + ' ' + item.id);
+          clashItem = item.name;
           console.log(item);
         }
       }
     });
     if (clash) {
-      res.json('Not available');
+      res.json(`Clashed with ${clashItem}`);
     } else {
       res.json('Available');
     }

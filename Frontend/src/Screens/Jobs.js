@@ -4,6 +4,7 @@ import JobTable from '../Components/JobTable';
 import CandidateTable from '../Components/CandidateTable';
 import NotyfContext from '../Components/NotyfContext';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -11,9 +12,12 @@ const Jobs = () => {
   const [assignJob, setAssignJob] = useState(false);
   const [jobAssigned, setJobAssigned] = useState({});
   const [resourceArray, setResourceArray] = useState([]);
+  const [updatedResourceArray, setUpdatedResourceArray] = useState([]);
   const [editData, setEditData] = useState({});
   const [sendData, setSendData] = useState({});
   const [projects, setProjects] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [avl, setAvl] = useState(true);
 
   const notyf = useContext(NotyfContext);
 
@@ -37,20 +41,20 @@ const Jobs = () => {
     }
   }, [editData, userInfo]);
 
-  // useEffect(() => {
-  //   getProjects();
-  // }, []); Combined with above
-
   async function getProjects() {
     const { data } = await axios.get('/api/get_projects');
     setProjects(data);
+    let ids = [];
+    data.forEach(item => {
+      ids.push(item.projectId);
+    });
+    const a = {
+      arr: ids
+    };
+    const pro = await axios.post('/api/workload', a);
+    let events = [];
+    setEvents(pro.data);
   }
-
-  // useEffect(() => {
-  //   if (Number(assignCount) > Number(jobAssigned.feCount)) {
-  //     setError(true);
-  //   }
-  // }, [assignCount]);
 
   const populateData = data => {
     setSendData(data);
@@ -58,12 +62,11 @@ const Jobs = () => {
 
   const childToParent = (item, job) => {
     item.sort((a, b) => (a.feLevel < b.feLevel ? 1 : -1));
+    item.forEach(it => (it.availability = false));
+
     setAssignJob(true);
     setResourceArray(item);
     setJobAssigned(job);
-    // console.log('Job Id is ' + jobAssigned);
-
-    // setJobName(item.name);
   };
 
   const editDataChildToParent = data => {
@@ -97,6 +100,25 @@ const Jobs = () => {
     // }
   }
 
+  const checkHandler = () => {
+    let relEvents = events.filter(event => new Date(event.startDate.split(' ')[0]) <= new Date(jobAssigned.endDate) && new Date(event.endDate.split(' ')[0]) >= new Date(jobAssigned.startDate));
+    let dataArr = [...resourceArray];
+    dataArr.forEach(item => {
+      let flag = true;
+      relEvents.forEach(rel => {
+        rel.resources.forEach(res => {
+          if (res.resourceId === Number(item.gid)) {
+            flag = false;
+          }
+        });
+      });
+      if (flag) {
+        item.availability = true;
+      }
+    });
+    setUpdatedResourceArray(resourceArray);
+  };
+
   return (
     <main className='bg-dark text-light'>
       <section className='w-50 mx-auto p-4'>
@@ -112,9 +134,12 @@ const Jobs = () => {
           {/* <h3 className='my-3'>Suitable Candidates for {jobName}</h3> */}
           <h3 className='my-4'>Suitable Candidates for {jobAssigned.name}</h3>
           <h6>Number of Field Engineers Required : {jobAssigned.feCount}</h6>
+          <Button className='my-2' onClick={checkHandler}>
+            Check All
+          </Button>
           {/* <h6>Number of Field Engineers Assigned: {jobAssigned && jobAssigned.assigned && jobAssigned.assigned.length}</h6> */}
 
-          <CandidateTable resourceArray={resourceArray} assignTask={assignTask} jobAssigned={jobAssigned} projects={projects} />
+          <CandidateTable resourceArray={resourceArray} assignTask={assignTask} jobAssigned={jobAssigned} projects={projects} avl={avl} />
         </section>
       )}
     </main>

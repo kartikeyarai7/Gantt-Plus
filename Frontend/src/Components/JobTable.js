@@ -165,8 +165,8 @@ const JobTable = ({ childToParent, editDataChildToParent }) => {
     };
 
     const res = await axios.post('/api/assign_jobs', data);
+    console.log(res);
     childToParent(res.data, db[i]);
-    console.log(res.data);
   }
 
   return (

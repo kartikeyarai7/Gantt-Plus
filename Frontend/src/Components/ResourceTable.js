@@ -39,7 +39,6 @@ const ResourceTable = ({ childToParent }) => {
       data.forEach(item => {
         a.push(item.name);
       });
-      console.log(a);
     } catch (error) {
       console.log(error);
     }

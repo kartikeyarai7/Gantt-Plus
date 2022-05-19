@@ -69,7 +69,7 @@ const CalendarBDS = () => {
     try {
       const id = { id: data[i]._id };
       const { res } = await axios.post('/api/delete_bds', id);
-      notyf.error('Job deleted');
+      notyf.error('Job deleted. Reload');
       // window.location.reload();
     } catch (error) {
       console.log(error);
@@ -166,7 +166,7 @@ const CalendarBDS = () => {
         curData.push(obj);
         try {
           const { res } = await axios.post('/api/add_bds-schedule', obj);
-          notyf.success('New Job added');
+          notyf.success('New Job added. Reload');
 
           // window.location.reload();
         } catch (error) {
