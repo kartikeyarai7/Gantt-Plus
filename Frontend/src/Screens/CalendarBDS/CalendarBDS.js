@@ -79,6 +79,18 @@ const CalendarBDS = () => {
   async function getDataHandler() {
     try {
       const { data } = await axios.get('/api/bds-schedule');
+      data.sort((a, b) => {
+        let fa = a.country.toLowerCase(),
+          fb = b.country.toLowerCase();
+
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
       setData(data);
     } catch (error) {
       console.log(error);
